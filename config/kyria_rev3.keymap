@@ -7,7 +7,10 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/led/led.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/rgb.h>
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -77,15 +80,15 @@
             //                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
 
             bindings = <
-&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                            &kp F                &kp G       &kp C             &kp R  &kp L  &mm_backspace_delete
-&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                            &kp D                &kp H       &kp T             &kp N  &kp S  &mt RIGHT_SHIFT MINUS
-&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp K_MUTE  &none  &kp BACKSLASH  &kp B                &kp M       &kp W             &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
-                                                   &to 1    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &mo 3       &mo 2  &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp K_PLAY_PAUSE
+&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                                     &kp F                &kp G       &kp C             &kp R  &kp L  &mm_backspace_delete
+&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                                     &kp D                &kp H       &kp T             &kp N  &kp S  &mt RIGHT_SHIFT MINUS
+&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp ENTER  &kp PRINTSCREEN  &kp BACKSLASH  &kp B                &kp M       &kp W             &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
+                                                   &mo 5    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &mo 3      &mo 2            &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp K_PLAY_PAUSE
             >;
 
             sensor-bindings =
-                <&inc_dec_kp K_VOL_UP K_VOL_DN>,
-                <&inc_dec_kp PAGE_UP PAGE_DOWN>;
+                <&inc_dec_kp TAB LS(TAB)>,
+                <&inc_dec_kp K_SCROLL_DOWN K_SCROLL_UP>;
 
             label = "DVORAK";
         };
@@ -98,13 +101,12 @@
             //                       |      |      |      |      |      |      |      |      |      |      |      |      |
 
             bindings = <
-&trans  &trans  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans      &bt BT_SEL 3  &bt BT_SEL 4  &trans                                        &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans      &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                            &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp A  &kp Z  &kp E   &kp R   &kp T                                         &kp Y   &kp U      &kp I     &kp O      &kp P     &trans
+&trans  &kp Q  &kp S  &kp D   &kp F   &kp G                                         &kp H   &kp J      &kp K     &kp L      &kp M     &mt RIGHT_SHIFT DOLLAR
+&trans  &kp W  &kp X  &kp C   &kp V   &kp B   &kp EQUAL  &trans  &trans  &kp CARET  &kp N   &kp COMMA  &kp SEMI  &kp COLON  &kp EXCL  &mt RIGHT_CONTROL ASTERISK
+                      &trans  &trans  &trans  &trans     &trans  &trans  &trans     &trans  &trans     &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
             label = "AZERTY";
         };
 
@@ -130,12 +132,23 @@
             label = "NAV";
         };
 
+        FUNCTIONS {
+            bindings = <
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                                  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans   &trans   &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans   &trans   &trans
+                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+
+            label = "FUNCTIONS";
+        };
+
         SETTINGS {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&to 0   &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_CLR  &out OUT_TOG                                       &rgb_ug RGB_TOG  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &rgb_ug RGB_EFF
+&to 1   &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &trans      &ext_power EP_TOG                                  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &rgb_ug RGB_EFR
+&trans  &trans         &trans         &trans         &trans      &trans             &trans  &trans  &trans  &trans  &trans           &trans           &trans           &trans           &trans           &trans
+                                      &trans         &trans      &trans             &trans  &trans  &trans  &trans  &trans           &trans           &trans
             >;
 
             label = "SETTINGS";
