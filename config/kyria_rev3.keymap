@@ -101,7 +101,7 @@
             >;
 
             sensor-bindings =
-                <&inc_dec_kp TAB LS(TAB)>,
+                <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>,
                 <&inc_dec_kp PAGE_DOWN PAGE_UP>;
 
             label = "DVORAK";
@@ -137,14 +137,16 @@
 
         NAV {
             bindings = <
-&trans  &trans  &kp HOME        &trans          &kp END    &kp K_SCROLL_UP                                    &kp PAGE_UP    &kp HOME        &kp K_PLAY_PAUSE  &kp END          &kp C_VOLUME_UP  &trans
-&trans  &trans  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT  &kp K_SCROLL_DOWN                                  &kp PAGE_DOWN  &kp LEFT_ARROW  &kp UP_ARROW      &kp RIGHT_ARROW  &kp C_VOL_DN     &trans
-&trans  &trans  &trans          &kp DOWN_ARROW  &trans     &trans             &trans  &trans  &trans  &trans  &trans         &kp K_PREVIOUS  &kp DOWN_ARROW    &kp K_NEXT       &kp K_MUTE       &trans
-                                &trans          &trans     &trans             &trans  &trans  &trans  &trans  &trans         &trans          &trans
+&trans  &trans     &kp HOME        &trans          &kp END      &kp K_SCROLL_UP                                    &kp PAGE_UP    &kp HOME        &kp K_PLAY_PAUSE  &kp END          &kp C_VOLUME_UP  &trans
+&trans  &trans     &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT    &kp K_SCROLL_DOWN                                  &kp PAGE_DOWN  &kp LEFT_ARROW  &kp UP_ARROW      &kp RIGHT_ARROW  &kp C_VOL_DN     &trans
+&trans  &kp K_CUT  &kp K_COPY      &kp DOWN_ARROW  &kp K_PASTE  &trans             &trans  &trans  &trans  &trans  &trans         &kp K_PREVIOUS  &kp DOWN_ARROW    &kp K_NEXT       &kp K_MUTE       &trans
+                                   &trans          &trans       &trans             &trans  &trans  &trans  &trans  &trans         &trans          &trans
             >;
 
             label = "NAV";
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+            sensor-bindings =
+                <&inc_dec_kp TAB LS(TAB)>,
+                <&inc_dec_kp PAGE_DOWN PAGE_UP>;
         };
 
         FUNCTIONS {
@@ -156,6 +158,9 @@
             >;
 
             label = "FUNCTIONS";
+            sensor-bindings =
+                <&inc_dec_kp UP_ARROW DOWN_ARROW>,
+                <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
         };
 
         SETTINGS {
@@ -167,6 +172,15 @@
             >;
 
             label = "SETTINGS";
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        fn {
+            if-layers = <2 3>;
+            then-layer = <4>;
         };
     };
 };
