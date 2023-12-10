@@ -116,10 +116,10 @@
             //                       |      |      |      |      |      |      |      |      |      |      |      |      |
 
             bindings = <
-&trans  &kp A  &kp Z  &kp E   &kp R   &kp T                                         &kp Y   &kp U      &kp I     &kp O      &kp P     &trans
-&trans  &kp Q  &kp S  &kp D   &kp F   &kp G                                         &kp H   &kp J      &kp K     &kp L      &kp M     &mt RIGHT_SHIFT DOLLAR
-&trans  &kp W  &kp X  &kp C   &kp V   &kp B   &kp EQUAL  &trans  &trans  &kp CARET  &kp N   &kp COMMA  &kp SEMI  &kp COLON  &kp EXCL  &mt RIGHT_CONTROL ASTERISK
-                      &trans  &trans  &trans  &trans     &trans  &trans  &trans     &trans  &trans     &trans
+&trans  &kp A  &kp Z  &kp E   &kp R   &kp T                                          &kp Y   &kp U      &kp I     &kp O      &kp P     &trans
+&trans  &kp Q  &kp S  &kp D   &kp F   &kp G                                          &kp H   &kp J      &kp K     &kp L      &kp M     &mt RIGHT_SHIFT EQUAL
+&trans  &kp W  &kp X  &kp C   &kp V   &kp B   &kp CARET  &trans  &trans  &kp DOLLAR  &kp N   &kp COMMA  &kp SEMI  &kp COLON  &kp EXCL  &mt RIGHT_CONTROL ASTERISK
+                      &trans  &trans  &trans  &trans     &trans  &trans  &trans      &trans  &trans     &trans
             >;
 
             label = "AZERTY";
