@@ -9,6 +9,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/rgb.h>
 
@@ -67,6 +68,20 @@
             #binding-cells = <0>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
+
+        tap_sym_fn: tap_sym_fn {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_SYM_FN";
+            #binding-cells = <0>;
+            bindings = <&mo 2>, <&mo 4>;
+        };
+
+        tap_nav_fn: tap_nav_fn {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_NAV_FN";
+            #binding-cells = <0>;
+            bindings = <&mo 3>, <&mo 4>;
+        };
     };
 
     keymap {
@@ -80,15 +95,15 @@
             //                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
 
             bindings = <
-&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                                     &kp F                &kp G       &kp C             &kp R  &kp L  &mm_backspace_delete
-&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                                     &kp D                &kp H       &kp T             &kp N  &kp S  &mt RIGHT_SHIFT MINUS
-&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp ENTER  &kp PRINTSCREEN  &kp BACKSLASH  &kp B                &kp M       &kp W             &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
-                                                   &mo 5    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &mo 3      &mo 2            &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp K_PLAY_PAUSE
+&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                                       &kp F                &kp G       &kp C             &kp R  &kp L  &mm_backspace_delete
+&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                                       &kp D                &kp H       &kp T             &kp N  &kp S  &mt RIGHT_SHIFT MINUS
+&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp ENTER    &kp PRINTSCREEN  &kp BACKSLASH  &kp B                &kp M       &kp W             &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
+                                                   &mo 5    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &tap_sym_fn  &tap_nav_fn      &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp K_PLAY_PAUSE
             >;
 
             sensor-bindings =
                 <&inc_dec_kp TAB LS(TAB)>,
-                <&inc_dec_kp K_SCROLL_DOWN K_SCROLL_UP>;
+                <&inc_dec_kp C_AC_SCROLL_DOWN C_AC_SCROLL_UP>;
 
             label = "DVORAK";
         };
@@ -112,10 +127,10 @@
 
         SYM {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp N1    &kp N2     &kp N3     &kp N4                &kp N5                                           &kp N6     &kp N7    &kp N8     &kp N9    &kp N0    &trans
+&trans  &kp EXCL  &kp AT     &kp POUND  &kp DLLR              &kp PERCENT                                      &kp CARET  &kp AMPS  &kp STAR   &kp LPAR  &kp RPAR  &trans
+&trans  &kp BSLH  &kp COLON  &kp SEMI   &kp LEFT_PARENTHESIS  &kp LBKT     &kp LBRC  &trans  &trans  &kp RBKT  &kp RBRC   &kp RPAR  &kp COMMA  &kp DOT   &kp FSLH  &trans
+                             &trans     &trans                &trans       &trans    &trans  &trans  &trans    &trans     &trans    &trans
             >;
 
             label = "SYM";
@@ -123,10 +138,10 @@
 
         NAV {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &kp HOME        &trans          &kp END    &kp K_SCROLL_UP                                    &kp PAGE_UP    &kp HOME        &kp K_PLAY_PAUSE  &kp END          &kp C_VOLUME_UP  &trans
+&trans  &trans  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT  &kp K_SCROLL_DOWN                                  &kt PAGE_DOWN  &kp LEFT_ARROW  &kt UP_ARROW      &kp RIGHT_ARROW  &kp C_VOL_DN     &trans
+&trans  &trans  &trans          &kp DOWN_ARROW  &trans     &trans             &trans  &trans  &trans  &trans  &trans         &kp K_PREVIOUS  &kp DOWN_ARROW    &kp K_NEXT       &kp K_MUTE       &trans
+                                &trans          &trans     &trans             &trans  &trans  &trans  &trans  &trans         &trans          &trans
             >;
 
             label = "NAV";
@@ -134,10 +149,10 @@
 
         FUNCTIONS {
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                                  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans   &trans   &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans   &trans   &trans
-                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans                                  &kp PERCENT  &kp N7  &kp N8  &kp N9  &kp SLASH     &kp MINUS
+&trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                                  &kp CARET    &kp N4  &kp N5  &kp N6  &kp ASTERISK  &kp PLUS
+&trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &trans  &kp COMMA    &kp N1  &kp N2  &kp N3  &kp DOT       &kp RET
+                         &trans   &trans   &trans  &trans  &trans  &trans  &trans  &trans       &trans  &trans
             >;
 
             label = "FUNCTIONS";
