@@ -68,18 +68,18 @@
             mods = <(MOD_LALT|MOD_RALT)>;
         };
 
-        tap_sym_fn: tap_sym_fn {
+        td_sym_fn: td_sym_fn {
             compatible = "zmk,behavior-tap-dance";
-            label = "TAP_SYM_FN";
+            label = "TD_SYM_FN";
             #binding-cells = <0>;
-            bindings = <&mo 2>, <&mo 4>;
+            bindings = <&mo 2>, <&mo 5>;
         };
 
-        tap_nav_fn: tap_nav_fn {
+        td_nav_num: td_nav_num {
             compatible = "zmk,behavior-tap-dance";
-            label = "TAP_NAV_FN";
+            label = "TD_NAV_NUM";
             #binding-cells = <0>;
-            bindings = <&mo 3>, <&mo 4>;
+            bindings = <&mo 3>, <&tog 4>;
         };
     };
 
@@ -94,15 +94,15 @@
             //                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
 
             bindings = <
-&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                                       &kp F                &kp G       &kp C             &kp R  &kp L  &mm_backspace_delete
-&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                                       &kp D                &kp H       &kp T             &kp N  &kp S  &mt RIGHT_SHIFT MINUS
-&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp ENTER    &kp PRINTSCREEN  &kp BACKSLASH  &kp B                &kp M       &kp W             &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
-                                                   &mo 5    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &tap_sym_fn  &tap_nav_fn      &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp K_PLAY_PAUSE
+&kp ESC                 &kp APOSTROPHE  &kp COMMA  &kp DOT  &kp P         &kp Y                                                                       &kp F                &kp G       &kp C            &kp R  &kp L  &mm_backspace_delete
+&mt LEFT_SHIFT TAB      &kp A           &kp O      &kp E    &kp U         &kp I                                                                       &kp D                &kp H       &kp T            &kp N  &kp S  &mt RIGHT_SHIFT MINUS
+&mt LEFT_CONTROL GRAVE  &kp SEMICOLON   &kp Q      &kp J    &kp K         &kp X               &kp EQUAL  &kp K_MUTE  &kp K_PLAY_PAUSE  &kp BACKSLASH  &kp B                &kp M       &kp W            &kp V  &kp Z  &mt RIGHT_CONTROL SLASH
+                                                   &mo 6    &kp LEFT_GUI  &mt LEFT_ALT ENTER  &kp SPACE  &td_sym_fn  &td_nav_num       &kp SPACE      &mt RIGHT_ALT ENTER  &caps_word  &kp PRINTSCREEN
             >;
 
             sensor-bindings =
                 <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>,
-                <&inc_dec_kp PAGE_DOWN PAGE_UP>;
+                <&inc_dec_kp K_NEXT K_PREVIOUS>;
 
             label = "DVORAK";
         };
@@ -137,10 +137,10 @@
 
         NAV {
             bindings = <
-&trans  &trans     &kp HOME        &trans          &kp END      &kp K_SCROLL_UP                                    &kp PAGE_UP    &kp HOME        &kp K_PLAY_PAUSE  &kp END          &kp C_VOLUME_UP  &trans
-&trans  &trans     &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT    &kp K_SCROLL_DOWN                                  &kp PAGE_DOWN  &kp LEFT_ARROW  &kp UP_ARROW      &kp RIGHT_ARROW  &kp C_VOL_DN     &trans
-&trans  &kp K_CUT  &kp K_COPY      &kp DOWN_ARROW  &kp K_PASTE  &trans             &trans  &trans  &trans  &trans  &trans         &kp K_PREVIOUS  &kp DOWN_ARROW    &kp K_NEXT       &kp K_MUTE       &trans
-                                   &trans          &trans       &trans             &trans  &trans  &trans  &trans  &trans         &trans          &trans
+&trans  &trans     &kp HOME        &trans          &kp END      &kp C_AC_SCROLL_UP                                    &kp PAGE_UP    &kp HOME        &kp K_PLAY_PAUSE  &kp END          &kp C_VOLUME_UP  &trans
+&trans  &trans     &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT    &kp C_AC_SCROLL_DOWN                                  &kp PAGE_DOWN  &kp LEFT_ARROW  &kp UP_ARROW      &kp RIGHT_ARROW  &kp C_VOL_DN     &trans
+&trans  &kp K_CUT  &kp K_COPY      &kp DOWN_ARROW  &kp K_PASTE  &trans                &trans  &trans  &trans  &trans  &trans         &kp K_PREVIOUS  &kp DOWN_ARROW    &kp K_NEXT       &kp K_MUTE       &trans
+                                   &trans          &trans       &trans                &trans  &trans  &trans  &trans  &trans         &trans          &trans
             >;
 
             label = "NAV";
@@ -149,18 +149,26 @@
                 <&inc_dec_kp PAGE_DOWN PAGE_UP>;
         };
 
-        FUNCTIONS {
+        NUM {
             bindings = <
-&trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans                                  &kp PERCENT  &kp N7  &kp N8  &kp N9  &kp SLASH     &kp MINUS
-&trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                                  &kp CARET    &kp N4  &kp N5  &kp N6  &kp ASTERISK  &kp PLUS
-&trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans  &trans  &trans  &trans  &trans  &kp COMMA    &kp N1  &kp N2  &kp N3  &kp DOT       &kp RET
-                         &trans   &trans   &trans  &trans  &trans  &trans  &trans  &trans       &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                  &kp PERCENT  &kp N7  &kp N8  &kp N9  &kp SLASH     &kp MINUS
+&trans  &trans  &trans  &trans  &trans  &trans                                  &kp CARET    &kp N4  &kp N5  &kp N6  &kp ASTERISK  &kp PLUS
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp COMMA    &kp N1  &kp N2  &kp N3  &kp DOT       &kp RET
+                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans       &trans  &trans
             >;
 
-            label = "FUNCTIONS";
-            sensor-bindings =
-                <&inc_dec_kp UP_ARROW DOWN_ARROW>,
-                <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
+            label = "NUM";
+        };
+
+        FN {
+            bindings = <
+&trans  &kp F9  &kp F10  &kp F11  &kp F12  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp F1  &kp F2   &kp F3   &kp F4   &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                         &trans   &trans   &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+
+            label = "FN";
         };
 
         SETTINGS {
@@ -177,10 +185,5 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-
-        fn {
-            if-layers = <2 3>;
-            then-layer = <4>;
-        };
     };
 };
